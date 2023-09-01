@@ -1,0 +1,9 @@
+Django==4.2.3
+torchtext
+torch
+spacy
+tqdm
+numpy
+jupyter
+notebook
+transformers

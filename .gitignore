@@ -1,0 +1,12 @@
+# Cached data
+*/*/__pycache__*
+*/*/*/__pycache__*
+*/*/*/*/__pycache__*
+*/*/*/*/*/__pycache__*
+
+# Env files
+.venv
+.DS_Store
+
+# Debug output
+models/PretrainedModels/GPT2/DebugResults/*

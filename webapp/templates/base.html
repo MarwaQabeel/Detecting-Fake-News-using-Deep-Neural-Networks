@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+
+<!DOCTYPE html>
+<html lang="en" ng-app="fakenewsdetectorapp">
+<head>
+	<meta charset="utf-8">
+	<title>FNDA</title>
+	<link rel="stylesheet" href="{% static 'css/custom-style.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/bootstrap-glyphicons.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'css/diff2html.min.css' %}">
+	
+	<link rel="stylesheet" href="{% static 'css/Treant.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/perfect-scrollbar.css' %}" />
+	<!-- CSS -->
+	<!-- Javascripts -->
+	<script src="{% static 'common/diff2html.min.js' %}"></script>
+	<script src="{% static 'common/jquery.min.js' %}"></script>
+	<script src="{% static 'common/bootstrap.min.js' %}"></script>
+	<script src="{% static 'common/Treant.min.js' %}"></script>
+	<script src="{% static 'common/raphael.js' %}"></script>
+	<script src="{% static 'common/jquery.mousewheel.js' %}"></script>
+	<script src="{% static 'common/perfect-scrollbar.js' %}"></script>
+</head>
+<body style="height:100%;background-color:rgb(250, 250, 245)" id="full">
+	<nav class="navbar fixed-top navbar-dark" style="background-color:#0009">
+		<ul class="nav nav-justified">
+		  	<p class="navbar-brand " style="font-family:Georgia;font-weight:bold;background-color:#999;font-size:25px;border-radius:10px;">
+				<a class="nav-link" id="Bar-Title" href="{%url 'repository:main'%}">
+					FNDA
+				</a>
+			</p>
+		</ul>
+		<ur class="nav justify-content-end">
+			<li class="nav-item">
+				<a class="nav-link" id="Bar-Title" style="font-size:20px" href="{% url 'repository:about'%}" >About</a>
+			</li>
+			{% comment %} <li class="nav-item">
+				<a class="nav-link" id="Bar-Title" style="font-size:20px" href="{% url 'repository:contact'%}" >Contact Us</a>
+			</li> {% endcomment %}
+		</ul>
+	</nav>
+  
+	{% block content %}
+	{% endblock %}
+	
+	<footer class="text-center text-white fixed-bottom" style="background-color: #21081;">
+		<!-- Grid container -->
+		<div class="container p-4"></div>
+		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.8);">
+		  © 2023 Copyright:
+		  <a class="text-white" href="https://github.gatech.edu/aabdelmalak3/cs7643-groupproject">Github Repo</a>
+		</div>
+		<!-- Copyright -->
+	  </footer>
+</body>
+</html>

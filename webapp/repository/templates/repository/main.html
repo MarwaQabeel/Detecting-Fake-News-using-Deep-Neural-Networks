@@ -1,0 +1,109 @@
+{% extends 'repository/base.html' %}
+
+{%block cardContent%}
+<div class="row" id="welcome_message"> 
+    <h2 style="font-family:verdena;font-style:italic;font-weight:bold"> Welcome to Fake News Detector Application</h2><br>
+    <p class="lead"> 
+        This is a web application that is implemented using Django framework. The application is used to detect fake news.
+        The detection is done using several deep learning algorithms. For more details about the application please visit the
+        <a href="{%url 'repository:about' %}">About</a> page where you will find a link for the code development and experimentations github repo.
+    </p>
+</div>
+<hr>
+<div class="justify-content-center">
+    <div class="col">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <div method='post' id="addform" class="row justify-content-center">
+                <div class="col-md-6">
+                    <input type="text" id="search_bar" name="search" placeholder="Search for news" class="col form-control">
+                </div>
+                <div class="col-md-2">
+                    <select name="model_type" class="field form-control">
+                        {% comment %} <option>GPT2</option>
+                        <option selected>BERT</option>
+                        <option>LSTM</option> {% endcomment %}
+                        <option>Transformer</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <a class="btn btn-primary" id="search_btn">
+                        Search
+                    </a>
+                </div>
+
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-danger" id="clear_btn">Clear</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div>
+        <div>
+            <h3>Results:</h3>
+        </div>
+        <div id="result">
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $("#clear_btn").click(function() {
+            $("#result").empty();
+            $("#accuracy").empty();
+        });
+    });
+
+    var autoComplete = function() {
+        // Send ajax request to help autoComplete
+        var url = "{% url 'repository:autoComplete' %}";
+        $.ajax({
+            url: url,
+            data: {
+                'search': document.getElementById("search_bar").value,
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data)
+                
+                // Show the suggestions as a menu above the search bar
+                var suggestions = data.suggestions;
+                var html = "";
+                for (var i = 0; i < suggestions.length; i++) {
+                    html += "<div class='suggestion' onclick='fillSuggestion(this)'>" + suggestions[i] + "</div>";
+                }
+                document.getElementById("suggestions").innerHTML = html;
+                document.getElementById("suggestions").style.display = "block";
+                
+            }//
+        });
+    }
+
+    $("#search_btn").click(function () {
+        var search = $("#search_bar").val();
+        var url = "{% url 'repository:search' %}";
+        $.ajax({
+            url: url,
+            timeout: 15000,
+            data: {
+                'search': search
+            },
+            success: function (data) {
+                console.log(data)
+                var color = "green"
+                if (data["response"] == "Fake") {
+                    color = "red"
+                }
+                var html = "<div id=\"result\" style=\"color:"+color+"\">";
+                html += data["response"]
+                html += "</div>"
+                // Add the result to the result block
+                $("#result").html(html)
+                //$("#result").style = "display:block";
+            }
+        });
+    });
+</script>
+{%endblock cardContent%}
