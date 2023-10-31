@@ -1,5 +1,4 @@
 # Fake News Detection Project
-Group Project for Deep Learning Subject Class CS7643 Summer 2023
 
 Project is mainly focused on fake news detection using several Deep Learning techniques, comparing them, and visualizing the final outputs in order to understand the semmantics that are extracted from the text.
 
